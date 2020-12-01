@@ -36,8 +36,6 @@ object ReportRepair {
 }
 
 fun main() {
-    // read from file
-    // readFileLineByLineUsingForEachLine("day1-input")
     val reportExpenses = mutableListOf<Int>()
     val openStream: InputStream = ReportRepair::class.java.getResource("/day1-input").openStream()
     openStream.bufferedReader().useLines { lines -> lines.forEach { reportExpenses.add(it.toInt()) } }
