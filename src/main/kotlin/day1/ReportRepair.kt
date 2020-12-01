@@ -1,21 +1,39 @@
 package day1
 
-import java.io.File
 import java.io.InputStream
 
 object ReportRepair {
-    fun findEntries(numberList: List<Int>): Int {
-        var a = -1
-        var b = -1
 
-        loop@ for (nextA in numberList) {
-            a = nextA
-            b = 2020 - a
-            for (n in numberList) {
-                if (n == b) break@loop
+    /**
+     * Brute Force approach
+     */
+    fun findTwoEntries(numberList: List<Int>): Int {
+        var result = 0
+        for (a in numberList) {
+            for (b in numberList) {
+                if (2020 - (a + b) == 0) {
+                    result = a * b
+                }
             }
         }
-        return a * b
+        return result
+    }
+
+    /**
+     * Brute Force approach
+     */
+    fun findThreeEntries(numberList: List<Int>): Int {
+        var result = 0
+        for (a in numberList) {
+            for (b in numberList) {
+                for (c in numberList) {
+                    if (2020 - (a + b + c) == 0) {
+                        result = a * b * c
+                    }
+                }
+            }
+        }
+        return result
     }
 }
 
@@ -26,7 +44,9 @@ fun main() {
     val openStream: InputStream = ReportRepair::class.java.getResource("/day1-input").openStream()
     openStream.bufferedReader().useLines { lines -> lines.forEach { reportExpenses.add(it.toInt()) } }
 
-    val answer = ReportRepair.findEntries(reportExpenses)
+    val answer1 = ReportRepair.findTwoEntries(reportExpenses)
+    val answer2 = ReportRepair.findThreeEntries(reportExpenses)
 
-    println(answer)
+    println("First part: $answer1")
+    println("Second part: $answer2")
 }
