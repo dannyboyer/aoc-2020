@@ -8,32 +8,30 @@ object ReportRepair {
      * Brute Force approach O(n^2)
      */
     fun findTwoEntries(numberList: List<Int>): Int {
-        var result = 0
         for (a in numberList) {
             for (b in numberList) {
-                if (2020 - (a + b) == 0) {
-                    result = a * b
+                if (2020 == a + b) {
+                    return a * b
                 }
             }
         }
-        return result
+        return -1
     }
 
     /**
      * Brute Force approach O(n^3)
      */
     fun findThreeEntries(numberList: List<Int>): Int {
-        var result = 0
         for (a in numberList) {
             for (b in numberList) {
                 for (c in numberList) {
-                    if (2020 - (a + b + c) == 0) {
-                        result = a * b * c
+                    if (2020 == a + b + c) {
+                        return a * b * c
                     }
                 }
             }
         }
-        return result
+        return -1
     }
 }
 
