@@ -10,3 +10,4 @@ Advent of code 2020
 * [2020 Advent of Code](https://adventofcode.com/)
 * [Learn Kotlin by Example](https://play.kotlinlang.org/byExample/overview)
 * [Kotlin Documentation](https://kotlinlang.org/docs/reference/basic-syntax.html)
+* [Junit 5 + Kotlin](https://www.baeldung.com/junit-5-kotlin)

@@ -11,11 +11,15 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    testImplementation(kotlin("test-junit5"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
 }
 application {
     mainClassName = "MainKt"
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }
