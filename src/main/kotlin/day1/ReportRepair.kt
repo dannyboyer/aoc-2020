@@ -5,7 +5,7 @@ import java.io.InputStream
 object ReportRepair {
 
     /**
-     * Brute Force approach
+     * Brute Force approach O(n^2)
      */
     fun findTwoEntries(numberList: List<Int>): Int {
         var result = 0
@@ -20,7 +20,7 @@ object ReportRepair {
     }
 
     /**
-     * Brute Force approach
+     * Brute Force approach O(n^3)
      */
     fun findThreeEntries(numberList: List<Int>): Int {
         var result = 0
