@@ -12,9 +12,9 @@ internal class PasswordPhilosophyTest {
         val password2 = "1-3 b: cdefg"
         val password3 = "2-9 c: ccccccccc"
 
-        val result1 = Problem2.isValid(password1)
-        val result2 = Problem2.isValid(password2)
-        val result3 = Problem2.isValid(password3)
+        val result1 = isValidOld(password1)
+        val result2 = isValidOld(password2)
+        val result3 = isValidOld(password3)
 
         assertEquals(true, result1)
         assertEquals(false, result2)
@@ -27,9 +27,9 @@ internal class PasswordPhilosophyTest {
         val password2 = "1-3 b: cdefg"
         val password3 = "2-9 c: ccccccccc"
 
-        val result1 = Problem1.isValid(password1)
-        val result2 = Problem1.isValid(password2)
-        val result3 = Problem1.isValid(password3)
+        val result1 = isValidNew(password1)
+        val result2 = isValidNew(password2)
+        val result3 = isValidNew(password3)
 
         assertEquals(true, result1)
         assertEquals(false, result2)
