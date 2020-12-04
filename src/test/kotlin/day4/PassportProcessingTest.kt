@@ -1,38 +1,12 @@
 package day4
 
-import day3.PassportProcessing
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 
 internal class PassportProcessingTest {
-
-
-    fun readPassportFromString() {
-        val passports = PassportProcessing.initPassport(
-            listOf(
-                "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd",
-                "byr:1937 iyr:2017 cid:147 hgt:183cm",
-                "",
-                "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884",
-                "hcl:#cfa07d byr:1929",
-                "",
-                "hcl:#ae17e1 iyr:2013",
-                "eyr:2024",
-                "ecl:brn pid:760753108 byr:1931",
-                "hgt:179cm",
-                "",
-                "hcl:#cfa07d eyr:2025 pid:166559648",
-                "iyr:2011 ecl:brn hgt:59in"
-            )
-        )
-        val count = PassportProcessing.solve1(passports)
-        assertEquals(2, count)
-    }
-
     @Test
-    internal fun `chekByr`() {
+    internal fun chekByr() {
         val passports = PassportProcessing.initPassport(
             listOf(
                 "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd",
@@ -55,7 +29,7 @@ internal class PassportProcessingTest {
     }
 
     @Test
-    internal fun `chekHgt`() {
+    internal fun chekHgt() {
         val passports = PassportProcessing.initPassport(
             listOf(
                 "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd",
@@ -80,7 +54,7 @@ internal class PassportProcessingTest {
     }
 
     @Test
-    internal fun `chekHcl`() {
+    internal fun chekHcl() {
         val passports = PassportProcessing.initPassport(
             listOf(
                 "ecl:gry pid:860033327 eyr:2020 hcl:#123abc",
@@ -101,8 +75,5 @@ internal class PassportProcessingTest {
         assertEquals(true, passports[0].isHclValid())
         assertEquals(false, passports[1].isHclValid())
         assertEquals(false, passports[2].isHclValid())
-
     }
-
-
 }

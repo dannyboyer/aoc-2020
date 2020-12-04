@@ -3,7 +3,7 @@ Advent of code 2020
 
 ## Goal
 * Familiarize myself with Kotlin
-* Go as far as possible in the AOC challenge (further than last year :p)
+* ~~Go as far as possible in the AOC challenge (further than last year :p)~~
 * Have fun! 
 
 ## Useful links
