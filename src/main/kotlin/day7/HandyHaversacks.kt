@@ -1,6 +1,6 @@
 package day7
 
-class Bag(val color: String, val quantity: Int, var children: List<Bag?>)
+class Bag(val color: String, val quantity: Int, var children: List<Bag>)
 
 object HandyHaversacks {
     fun makeBagFrom(color: String, input: String): Bag {
@@ -8,8 +8,7 @@ object HandyHaversacks {
             .replace("bags", "", false)
             .replace("bag", "", false)
             .trim(' ', '.')
-            .split(',')
-            .map {
+            .split(',').mapNotNull {
                 val childColor = it.trim(' ').substringAfter(' ').trim(' ')
                 val quantityStr = it.substringBefore(" $childColor").trim(' ')
                 val quantity = if (quantityStr == "no") 0 else quantityStr.toInt()
@@ -32,9 +31,7 @@ object HandyHaversacks {
         for (rule in rules.entries) {
             val bag = rule.component2()
             for (child in bag.children) {
-                if (child != null) {
-                    child.children = rules[child.color]!!.children
-                }
+                child.children = rules[child.color]!!.children
             }
         }
         return rules
@@ -50,28 +47,30 @@ object HandyHaversacks {
         return count
     }
 
-    fun countNumberOfChildren(bag: Bag): Int {
-        var count = bag.quantity
-        if (bag.children.isNotEmpty()) {
-            for (child in bag.children) {
-                count += count * countNumberOfChildren(child!!)
-            }
-        }
-        return count
-    }
-
-
-    fun sumCount(rules: Map<String, Bag>): Int {
+    fun sumCount(ofColor: String, rules: Map<String, Bag>): Int {
         return rules.keys.map {
             if (it == "shiny gold") 0
             else (
-                    if (HandyHaversacks.countPossibleBagContainers(
-                            "shiny gold",
+                    if (countPossibleBagContainers(
+                            ofColor,
                             listOf(rules[it])
                         ) >= 1
                     ) 1 else 0
                     )
         }.sum()
+    }
+
+    fun countChildren(parentBag: Bag, acc: Int): Int {
+        var count = acc
+        if (parentBag.children.isEmpty()) {
+            return parentBag.quantity
+        } else {
+            for (bag in parentBag.children) {
+                count += parentBag.quantity * countChildren(bag, acc)
+            }
+            count += parentBag.quantity
+        }
+        return acc + count
     }
 }
 
@@ -84,10 +83,11 @@ fun main() {
 
     val rules = HandyHaversacks.makeRules(inputList)
     val compiledRules = HandyHaversacks.makeTree(rules)
-    val answer1 = HandyHaversacks.sumCount(compiledRules)
+    val answer1 = HandyHaversacks.sumCount("shiny gold", compiledRules)
+    val answer2 = HandyHaversacks.countChildren(compiledRules["shiny gold"]!!, 0) -1
 
     println("First part: $answer1 is the sum")
-    //println("Second part: $answer2 is the sum")
+    println("Second part: $answer2 is the sum")
 }
 
 

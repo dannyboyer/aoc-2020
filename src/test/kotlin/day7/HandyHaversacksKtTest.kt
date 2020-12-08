@@ -47,7 +47,7 @@ internal class HandyHaversacksKtTest {
     internal fun countPossibleBagContainersTest() {
         val rules = HandyHaversacks.makeRules(input)
         val compiledRules = HandyHaversacks.makeTree(rules)
-        val result = HandyHaversacks.sumCount(compiledRules)
+        val result = HandyHaversacks.sumCount("shiny gold", compiledRules)
 
         assertEquals(4, result)
     }
@@ -56,7 +56,8 @@ internal class HandyHaversacksKtTest {
     internal fun countNumberOfChildrenTest() {
         val rules = HandyHaversacks.makeRules(input)
         val compiledRules = HandyHaversacks.makeTree(rules)
-        val result = HandyHaversacks.countNumberOfChildren(compiledRules["shiny gold"]!!)
+        // we need to remove the prent bag
+        val result = HandyHaversacks.countChildren(compiledRules["shiny gold"]!!, 0) - 1
         assertEquals(32, result)
     }
 }
