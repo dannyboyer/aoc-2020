@@ -18,6 +18,18 @@ internal class HandheldHaltingKtTest {
         "acc +6"
     ).map { HandheldHalting.makeIns(it) }
 
+    val instructionsAlt = listOf(
+        "nop +0",
+        "acc +1",
+        "jmp +4",
+        "acc +3",
+        "jmp -3",
+        "acc -99",
+        "acc +1",
+        "nop -4",
+        "acc +6"
+    ).map { HandheldHalting.makeIns(it) }
+
     @Test
     fun makeIns() {
         val ins1 = HandheldHalting.makeIns("nop +0")
@@ -43,8 +55,10 @@ internal class HandheldHaltingKtTest {
 
     @Test
     internal fun testProgram() {
-        val result = Program(instructions).runProgram(instructions.first())
-        assertEquals(5, result)
+        val program = Program(instructions)
+        val output = program.runProgram(instructions.first())
+        assertEquals(-1, output)
+        assertEquals(5, program.acc)
     }
 
     @Test
@@ -52,6 +66,23 @@ internal class HandheldHaltingKtTest {
         val program = Program(instructions)
         program.runProgram(instructions.first())
         val possibleBugs = program.getPossibleBugs()
-        assertEquals(3, possibleBugs.size)
+        assertEquals(4, possibleBugs.size)
+    }
+
+    @Test
+    internal fun testSuccess() {
+        val program = Program(instructionsAlt)
+        val output = program.runProgram(instructionsAlt.first())
+        assertEquals(0, output)
+        assertEquals(8, program.acc)
+    }
+
+    @Test
+    internal fun testAutoFixProgram() {
+        val program = Program(instructions)
+        program.runProgram()
+        val possibleBugs = program.getPossibleBugs()
+        val result = findSolution(instructions, possibleBugs)
+        assertEquals(8, result)
     }
 }
